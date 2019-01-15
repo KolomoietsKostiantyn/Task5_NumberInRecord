@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\Visual Studio 2017\\Projects\\Task5_TheNumberInTheRecord\\Task5_TheNumberInTheRecord\\Task5_TheNumberInTheRecord.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Task5_NumberInRecord\\Task5_TheNumberInTheRecord\\Task5_TheNumberInTheRecord\\Task5_TheNumberInTheRecord.csproj",
       "projectName": "Task5_TheNumberInTheRecord",
-      "projectPath": "C:\\Users\\User\\Documents\\Visual Studio 2017\\Projects\\Task5_TheNumberInTheRecord\\Task5_TheNumberInTheRecord\\Task5_TheNumberInTheRecord.csproj",
+      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Task5_NumberInRecord\\Task5_TheNumberInTheRecord\\Task5_TheNumberInTheRecord\\Task5_TheNumberInTheRecord.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\Visual Studio 2017\\Projects\\Task5_TheNumberInTheRecord\\Task5_TheNumberInTheRecord\\obj\\",
+      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Task5_NumberInRecord\\Task5_TheNumberInTheRecord\\Task5_TheNumberInTheRecord\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
