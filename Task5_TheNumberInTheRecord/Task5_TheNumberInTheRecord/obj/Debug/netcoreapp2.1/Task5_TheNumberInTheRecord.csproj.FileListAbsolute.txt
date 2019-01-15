@@ -1,0 +1,11 @@
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\obj\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.csprojAssemblyReference.cache
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\obj\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\obj\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.AssemblyInfoInputs.cache
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\obj\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.AssemblyInfo.cs
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\bin\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.deps.json
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\bin\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.runtimeconfig.json
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\bin\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.runtimeconfig.dev.json
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\bin\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.dll
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\bin\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.pdb
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\obj\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.dll
+C:\Users\User\Documents\Visual Studio 2017\Projects\Task5_TheNumberInTheRecord\Task5_TheNumberInTheRecord\obj\Debug\netcoreapp2.1\Task5_TheNumberInTheRecord.pdb
