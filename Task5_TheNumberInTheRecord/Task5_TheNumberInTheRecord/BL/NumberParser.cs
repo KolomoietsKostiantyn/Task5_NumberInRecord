@@ -8,54 +8,56 @@ namespace Task5_TheNumberInTheRecord.BL
 {
     class NumberParser: INumberParser
     {
+        #region variables
+        private readonly long maxValue;
+        private readonly long minValue;
+        private readonly int ten = 10;
+        private readonly int twenty = 20;
+        private readonly int hundred = 100;
+        private readonly int thousand = 1000;
+        #endregion
 
-        public NumberParser()
+        public NumberParser(long maxValue, long minValue)
         {
-
+            this.maxValue = maxValue;
+            this.minValue = minValue;
         }
 
         public string Parse(long inner)
         {
-            long maxValue = 999999999999999;
-            long minValue = maxValue * (-1);
             if (inner < minValue || inner > maxValue)
             {
-                throw new ArgumentOutOfRangeException();//нужно ли писать текст ексепшина?
+                throw new ArgumentOutOfRangeException();
             }
-
             int maxDigit = NumberDigit(inner);
-            string result = "";
-            int digit = 1000;
+            string result = string.Empty;
             int currentDigit = maxDigit;
             if (inner < 0)
             {
                 result = "minus";
-                inner *= (-1);
+                inner =  Math.Abs(inner);
             }
             for (int i = 0; i < maxDigit; i++)
             {
-                long num = inner / (long)(Math.Pow(digit, currentDigit -1));
-                string order = "";
+                long num = inner / (long)(Math.Pow(thousand, currentDigit -1));
+                string order = string.Empty;
                 if (currentDigit > ((int)OverHundred.Hundred))
                 {
                     order = string.Format("{0}", ((OverHundred)currentDigit).ToString());
                 }
-
                 result = string.Format("{0} {1} {2}", result, HundredConverter(num), order);
-
-                inner = inner - num * (long)(Math.Pow(digit, currentDigit - 1));
+                inner = inner - num * (long)(Math.Pow(thousand, currentDigit - 1));
                 currentDigit--;
             }
-
             result = result.Trim();
             result = result.ToLower();
+
             return result;
         }
 
         private int NumberDigit(long inner)
         {
             int result = 1;
-            int thousand = 1000;
             do
             {
                 inner /= thousand;
@@ -68,33 +70,26 @@ namespace Task5_TheNumberInTheRecord.BL
             return result;
         }
 
-
-
-
         private string HundredConverter(long inner)
         {
-            int maxValue = 999;
-            if (inner < 0 || inner > maxValue)
+            int maxProcessValue = 999;
+            if (inner < 0 || inner > maxProcessValue)
             {
-                throw new ArgumentOutOfRangeException();//нужно ли писать текст ексепшина?
+                throw new ArgumentOutOfRangeException();
             }
-
-            string result = "";
+            string result = string.Empty;
             if (inner == 0)
             {
                 result = Units.Zero.ToString();
             }
             else
             {
-                int hundred = 100;
                 if (inner >= hundred)
                 {
                     long hundreds = (inner / hundred);
                     result = string.Format("{0} {1}", (Units)hundreds, OverHundred.Hundred);
                 }
                 inner = inner - (inner / hundred) * hundred;
-                int twenty = 20;
-                int ten = 10;
                 string flagВash = " ";
                 if (inner >= twenty)
                 {
@@ -114,12 +109,8 @@ namespace Task5_TheNumberInTheRecord.BL
                 result = result.Trim();
                 result = result.ToLower();
             }
+
             return result;
         }
-
-
-
-
-
     }
 }

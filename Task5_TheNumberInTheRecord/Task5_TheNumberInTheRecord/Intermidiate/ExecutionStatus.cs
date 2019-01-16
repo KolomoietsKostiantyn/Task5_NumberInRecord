@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Task5_TheNumberInTheRecord.Intermidiate
 {
-    interface IUI
+    enum ExecutionStatus
     {
-        void WaitForAnswer(string answer);
-        event SendNumber SendNumberDesc;
-        void Start();
+        Ok,
+        TooBigOrSmall
     }
 }

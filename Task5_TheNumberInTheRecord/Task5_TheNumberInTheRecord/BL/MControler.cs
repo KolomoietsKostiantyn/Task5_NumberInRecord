@@ -7,36 +7,36 @@ namespace Task5_TheNumberInTheRecord.BL
 {
     class MControler
     {
-        public MControler(IUI visualizator)
-        {
-            _converter = new NumberParser();
-            visualizator.SendNumberDesc += GetInnerNum;
-            CompareEnvelopesDesc += visualizator.WaitForAnswer;
-        }
-
-        private void GetInnerNum(long inner)
-        {
-            string result = _converter.Parse(inner);
-            if (_finishProcessing != null)  // использовать подсказки студии _finishProcessing?.Invoke(result);??????
-            {
-                _finishProcessing(result);
-            }
-        }
-
-        public event FinishProcessing CompareEnvelopesDesc
-        {
-            add
-            {
-                _finishProcessing += value;
-            }
-            remove
-            {
-                _finishProcessing -= value;
-            }
-        }
-
-        private FinishProcessing _finishProcessing;
-
+        #region Variables
+        private IVisualizator _visualizator;
         private INumberParser _converter;
+        #endregion
+
+        public MControler(IVisualizator visualizator)
+        {
+            _converter = new NumberParser(Constants.maxValue, Constants.minValue);
+            visualizator.SendNumberDesc += GetInnerNum;
+            _visualizator = visualizator;
+        }
+
+        private void GetInnerNum(long inner)  // добавить ловлю исключений
+        {
+            ExecutionStatus result = ExecutionStatus.Ok;
+            string answer;
+            try
+            {
+                answer = _converter.Parse(inner);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                result = ExecutionStatus.TooBigOrSmall;
+                answer = "You pass too big or small value.";
+            }
+
+            if (_visualizator != null)
+            {
+                _visualizator.WaitForAnswer(result, answer);
+            }
+        }
     }
 }

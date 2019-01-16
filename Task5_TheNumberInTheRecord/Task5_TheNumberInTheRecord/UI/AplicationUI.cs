@@ -7,57 +7,36 @@ using Task5_TheNumberInTheRecord.Intermidiate;
 
 namespace Task5_TheNumberInTheRecord.UI
 {
-    class AplicationUI : IUI
+    class AplicationUI : IVisualizator
     {
+        #region Variables
         private long[] _args;
-        private bool _isProcessed = false;
-        private string _answer;
-        private string instruction = "For the use of the program, transfer the"
-                            + " number in range -999 999 999 999 999 and 999 999 999 999 999"
-                            + " and get its capital equivalent";
+        private string _instruction;
+        private IInnerValidator Validator;
+        private SendNumber _sendNumber;
+        #endregion
+
         public AplicationUI(string[] args)
         {
-            _args = ValidateInitialization(args);
+            _instruction = string.Format("For the use of the program, transfer the"
+                            + " number in range {0} and {1}"
+                            + " and get its capital equivalent",Constants.minValue, Constants.maxValue);
+            Validator = new InnerValidator();
+            Validate(args);
         }
 
-
-        private long[] ValidateInitialization(string[] args)
+        private void Validate(string[] args)
         {
-            if (args == null)
+            bool result = Validator.Convertor(args,out _args);
+            if (!result)
             {
-                throw new NullReferenceException();
+                Console.WriteLine(_instruction);
             }
-            long[] result = new long[args.Length];
-            if (args.Length == 0)
-            {
-                Console.WriteLine(instruction);
-                result = null;
-            }
-            else
-            {
-
-
-                for (int i = 0; i < args.Length; i++)
-                {
-                    if (args[i] == null || !long.TryParse(args[i], out result[i]))
-                    {
-                        Console.WriteLine(instruction);
-                        result = null;
-                        break;
-                    }
-                }
-            }
-            return result;
-        }
+        }      
 
         public void Start()
         {
-            if (_args != null)
-            {
-                ProprocessingMainParams(_args);
-            }
-
-            string answer;
+            SendingInnParams(_args);
             do
             {
                 long enterNumber;
@@ -78,17 +57,8 @@ namespace Task5_TheNumberInTheRecord.UI
                 {
                     _sendNumber(enterNumber);
                 }
-                if (_isProcessed)
-                {
-                    _isProcessed = false;
-                    string result = string.Format("{0} - {1}", enterNumber, _answer);
-                    Console.WriteLine(result);
-                }
-
-
                 Console.WriteLine("Continue?");
-                answer = Console.ReadLine();
-            } while (ContinuationRequest(answer));
+            } while (ContinuationRequest(Console.ReadLine()));
         }
 
         private bool ContinuationRequest(string str)
@@ -102,27 +72,36 @@ namespace Task5_TheNumberInTheRecord.UI
             return result;
         }
 
-
-        private void ProprocessingMainParams(long[] _args)
+        private void SendingInnParams(long[] _args)
         {
-            foreach (long item in _args)
+            if (_args != null)
             {
-                _sendNumber(item);
-                if (_isProcessed)
+                for (int i = 0; i < _args.Length; i++)
                 {
-                    string result = string.Format("{0} - {1}", item, _answer);
-                    Console.WriteLine(result);
+                    Console.WriteLine(_args[i]);
+                    if (_sendNumber != null)
+                    {
+                        _sendNumber(_args[i]);
+                    }
                 }
             }
         }
 
-        public void WaitForAnswer(string answer)
+        public void WaitForAnswer(ExecutionStatus result,string answer)
         {
-            _isProcessed = true;
-            _answer = answer;
+            switch (result)
+            {
+                case ExecutionStatus.Ok:
+                    Console.WriteLine(answer);
+                    break;
+                case ExecutionStatus.TooBigOrSmall:
+                    Console.WriteLine(answer);
+                    Console.WriteLine(_instruction);
+                    break;
+                default:
+                    break;
+            }     
         }
-
-
 
         public event SendNumber SendNumberDesc
         {
@@ -135,9 +114,6 @@ namespace Task5_TheNumberInTheRecord.UI
                 _sendNumber -= value;
             } 
         }
-
-        private SendNumber _sendNumber;
-
 
     }
 }
