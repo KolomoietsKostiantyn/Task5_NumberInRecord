@@ -34,6 +34,7 @@ namespace Task5_TheNumberInTheRecord.UI
                     }
                 }
             }
+
             return result;
         }
     }

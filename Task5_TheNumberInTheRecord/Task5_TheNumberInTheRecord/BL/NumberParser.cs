@@ -30,7 +30,7 @@ namespace Task5_TheNumberInTheRecord.BL
                 throw new ArgumentOutOfRangeException();
             }
             int maxDigit = NumberDigit(inner);
-            string result = string.Empty;
+            string result = string.Empty; 
             int currentDigit = maxDigit;
             if (inner < 0)
             {
@@ -43,7 +43,7 @@ namespace Task5_TheNumberInTheRecord.BL
                 string order = string.Empty;
                 if (currentDigit > ((int)OverHundred.Hundred))
                 {
-                    order = string.Format("{0}", ((OverHundred)currentDigit).ToString());
+                    order = ((OverHundred)currentDigit).ToString();
                 }
                 result = string.Format("{0} {1} {2}", result, HundredConverter(num), order);
                 inner = inner - num * (long)(Math.Pow(thousand, currentDigit - 1));
