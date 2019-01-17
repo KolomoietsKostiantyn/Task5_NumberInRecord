@@ -10,9 +10,10 @@ namespace Task5_TheNumberInTheRecord
         static void Main(string[] args)
         {
 
-            IVisualizator visualizator = new AplicationUI(args);
-            MControler Controler = new MControler(visualizator);
-            visualizator.Start();
+            IVisualizator visualizator = new AplicationUI();
+            MControler Controler = new MControler(visualizator, args);
+            Controler.Start();
+            //visualizator.Start();
         }
     }
 }

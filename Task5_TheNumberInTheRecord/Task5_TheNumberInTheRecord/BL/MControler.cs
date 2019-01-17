@@ -10,18 +10,74 @@ namespace Task5_TheNumberInTheRecord.BL
         #region Variables
         private IVisualizator _visualizator;
         private INumberParser _converter;
+        private string[] _arr;
         #endregion
 
-        public MControler(IVisualizator visualizator)
+        public MControler(IVisualizator visualizator, string [] arr)
         {
+            _arr = arr;
             _converter = new NumberParser(Constants.maxValue, Constants.minValue);
-            visualizator.SendNumberDesc += GetInnerNum;
             _visualizator = visualizator;
         }
 
-        private void GetInnerNum(long inner)  // добавить ловлю исключений
+
+        public void Start()
         {
-            ExecutionStatus result = ExecutionStatus.Ok;
+            ValidateInner(_arr);
+            do
+            {
+                string StrNum = _visualizator.AskNumber();
+                TryConvert(StrNum);
+            } while (_visualizator.AskContinue());
+        }
+
+        private void TryConvert(string StrNum)
+        {
+            long num;
+            if (ProcessNum(StrNum, out num))
+            {
+                string result = GetInnerNum(num);
+                if (result != null)
+                {
+                    _visualizator.WaitForAnswer(ExecutionStatus.Ok, result, num);
+                }
+                else
+                {
+                    _visualizator.WaitForAnswer(ExecutionStatus.TooBigOrSmall);
+                }
+            }
+            else
+            {
+                _visualizator.WaitForAnswer(ExecutionStatus.CantConvertToNum);
+            }
+        }
+
+        
+        private void ValidateInner(string[] arr)
+        {
+            if (arr == null || arr.Length == 0)
+            {
+                _visualizator.WaitForAnswer(ExecutionStatus.Ininstruction);
+                return;
+            }
+            foreach (string item in arr)
+            {
+                TryConvert(item);
+            }
+        }
+
+        private bool ProcessNum(string str, out long num)
+        {
+            bool result = false;
+            if (long.TryParse(str, out num))
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        private string GetInnerNum(long inner) 
+        {
             string answer;
             try
             {
@@ -29,14 +85,10 @@ namespace Task5_TheNumberInTheRecord.BL
             }
             catch (ArgumentOutOfRangeException)
             {
-                result = ExecutionStatus.TooBigOrSmall;
-                answer = "You pass too big or small value.";
+                answer = null;
             }
 
-            if (_visualizator != null)
-            {
-                _visualizator.WaitForAnswer(result, answer);
-            }
+            return answer;
         }
     }
 }

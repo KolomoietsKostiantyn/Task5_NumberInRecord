@@ -6,7 +6,9 @@ namespace Task5_TheNumberInTheRecord.Intermidiate
 {
     enum ExecutionStatus
     {
+        Ininstruction,
         Ok,
-        TooBigOrSmall
+        TooBigOrSmall,
+        CantConvertToNum
     }
 }

@@ -6,7 +6,7 @@ namespace Task5_TheNumberInTheRecord.Intermidiate
 {
     public static class Constants
     {
-        public const long maxValue = 999999999999999;
-        public const long minValue =-999999999999999;
+        public const long maxValue = 999999999999;
+        public const long minValue =-999999999999;
     }
 }

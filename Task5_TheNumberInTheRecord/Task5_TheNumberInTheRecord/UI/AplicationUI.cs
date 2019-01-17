@@ -10,110 +10,54 @@ namespace Task5_TheNumberInTheRecord.UI
     class AplicationUI : IVisualizator
     {
         #region Variables
-        private long[] _args;
         private string _instruction;
-        private IInnerValidator Validator;
-        private SendNumber _sendNumber;
         #endregion
 
-        public AplicationUI(string[] args)
+        public AplicationUI()
         {
-            _instruction = string.Format("For the use of the program, transfer the"
+            _instruction = string.Format("For the use of the program, transfer the integer"
                             + " number in range {0} and {1}"
                             + " and get its capital equivalent",Constants.minValue, Constants.maxValue);
-            Validator = new InnerValidator();
-            Validate(args);
         }
 
-        private void Validate(string[] args)
+        public bool AskContinue()
         {
-            bool result = Validator.Convertor(args,out _args);
-            if (!result)
-            {
-                Console.WriteLine(_instruction);
-            }
-        }      
-
-        public void Start()
-        {
-            SendingInnParams(_args);
-            do
-            {
-                long enterNumber;
-                string innString;
-                bool continueFlag;
-                do
-                {
-                    continueFlag = false;
-                    Console.WriteLine("Enter number:");
-                    innString = Console.ReadLine();
-                    if (!long.TryParse(innString, out enterNumber))
-                    {
-                        Console.WriteLine("Wrong value, try again");
-                        continueFlag = true;
-                    }
-                } while (continueFlag);
-                if (_sendNumber != null)
-                {
-                    _sendNumber(enterNumber);
-                }
-                Console.WriteLine("Continue?");
-            } while (ContinuationRequest(Console.ReadLine()));
-        }
-
-        private bool ContinuationRequest(string str)
-        {
+            Console.WriteLine("Continue?");
+            string ask = Console.ReadLine();
+            ask = ask.ToLower();
             bool result = false;
-            str = str.ToLower();
-            if (str == "y" || str == "yes")
+            if (ask == "y" || ask == "yes")
             {
                 result = true;
             }
             return result;
         }
 
-        private void SendingInnParams(long[] _args)
+        public string AskNumber()
         {
-            if (_args != null)
-            {
-                for (int i = 0; i < _args.Length; i++)
-                {
-                    Console.WriteLine(_args[i]);
-                    if (_sendNumber != null)
-                    {
-                        _sendNumber(_args[i]);
-                    }
-                }
-            }
+            Console.WriteLine("Enter number to convert to number.");
+            return Console.ReadLine();
         }
 
-        public void WaitForAnswer(ExecutionStatus result,string answer)
+        public void WaitForAnswer(ExecutionStatus result, string answer = null, long num = 0)
         {
             switch (result)
             {
+                case ExecutionStatus.Ininstruction:
+                    Console.WriteLine(_instruction);
+                    break;
                 case ExecutionStatus.Ok:
-                    Console.WriteLine(answer);
+                    Console.WriteLine(string.Format("{0} - {1}", num, answer));
                     break;
                 case ExecutionStatus.TooBigOrSmall:
-                    Console.WriteLine(answer);
-                    Console.WriteLine(_instruction);
+                    Console.WriteLine("Number to big or small to be convert");
+                    break;
+                case ExecutionStatus.CantConvertToNum:
+                    Console.WriteLine("This text cannot be converted to number.");
                     break;
                 default:
                     break;
-            }     
-        }
-
-        public event SendNumber SendNumberDesc
-        {
-            add
-            {
-                _sendNumber += value;
             }
-            remove
-            {
-                _sendNumber -= value;
-            } 
         }
-
     }
 }
