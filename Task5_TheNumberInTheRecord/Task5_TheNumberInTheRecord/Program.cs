@@ -13,7 +13,6 @@ namespace Task5_TheNumberInTheRecord
             IVisualizator visualizator = new AplicationUI();
             MControler Controler = new MControler(visualizator, args);
             Controler.Start();
-            //visualizator.Start();
         }
     }
 }

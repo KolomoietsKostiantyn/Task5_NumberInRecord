@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using Task5_TheNumberInTheRecord.Intermidiate;
 
-//может-ли юай парсить входные данные??
-
 namespace Task5_TheNumberInTheRecord.UI
 {
     class AplicationUI : IVisualizator
